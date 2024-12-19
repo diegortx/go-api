@@ -1,22 +1,22 @@
 # Go API
 
-Este projeto é uma API escrita em Go que interage com um banco de dados para gerenciar produtos.
+This project is an API written in Go that interacts with a database to manage products.
 
-## Estrutura do Projeto
+## Project Structure
 
-- `model/`: Contém as definições das estruturas de dados.
-- `repository/`: Contém a lógica de acesso ao banco de dados.
+- `model/`: Contains data structure definitions.
+- `repository/`: Contains database access logic.
 
-## Arquivo `productRepository.go`
+## File `productRepository.go`
 
-Este arquivo contém a implementação do repositório de produtos. Ele inclui métodos para interagir com a tabela de produtos no banco de dados.
+This file contains the implementation of the product repository. It includes methods to interact with the products table in the database.
 
-### Funções Principais
+### Main Functions
 
-- `NewProductRepository(db *sql.DB) ProductRepository`: Cria uma nova instância do repositório de produtos.
-- `GetProduct() ([]model.Product, error)`: Recupera todos os produtos do banco de dados.
+- `NewProductRepository(db *sql.DB) ProductRepository`: Creates a new instance of the product repository.
+- `GetProduct() ([]model.Product, error)`: Retrieves all products from the database.
 
-### Exemplo de Uso
+### Usage Example
 
 ```go
 package main
@@ -29,7 +29,7 @@ import (
 )
 
 func main() {
-	// Conectar ao banco de dados
+	// Connect to the database
 	db, err := sql.Open("mysql", "user:password@tcp(127.0.0.1:3306)/dbname")
 	if err != nil {
 		fmt.Println(err)
@@ -37,46 +37,46 @@ func main() {
 	}
 	defer db.Close()
 
-	// Criar repositório de produtos
+	// Create product repository
 	productRepo := repository.NewProductRepository(db)
 
-	// Obter produtos
+	// Get products
 	products, err := productRepo.GetProduct()
 	if err != nil {
 		fmt.Println(err)
 		return
 	}
 
-	// Exibir produtos
+	// Display products
 	for _, product := range products {
-		fmt.Printf("ID: %d, Nome: %s, Preço: %.2f\n", product.ID, product.Name, product.Price)
+		fmt.Printf("ID: %d, Name: %s, Price: %.2f\n", product.ID, product.Name, product.Price)
 	}
 }
 ```
 
-## Requisitos
+## Requirements
 
 - Go 1.16+
 - MySQL
 
-## Instalação
+## Installation
 
-1. Clone o repositório:
+1. Clone the repository:
    ```sh
-   git clone https://github.com/seu-usuario/go-api.git
+   git clone https://github.com/your-username/go-api.git
    ```
-2. Instale as dependências:
+2. Install dependencies:
    ```sh
    go mod tidy
    ```
 
-## Configuração
+## Configuration
 
-Atualize a string de conexão com o banco de dados no exemplo de uso com suas credenciais e informações do banco de dados.
+Update the database connection string in the usage example with your credentials and database information.
 
-## Executando a Aplicação
+## Running the Application
 
-Execute o comando abaixo para iniciar a aplicação:
+Run the command below to start the application:
 
 ```sh
 go run main.go
