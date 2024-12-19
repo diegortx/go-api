@@ -4,7 +4,7 @@ import (
 	"go-api/controller"
 	"go-api/db"
 	"go-api/repository"
-	usecase "go-api/useCase"
+	"go-api/usecase"
 
 	"github.com/gin-gonic/gin"
 )
@@ -33,6 +33,8 @@ func main() {
 	})
 
 	server.GET("/products", ProductController.GetProduct)
+	server.POST("/product", ProductController.CreateProduct)
+	server.GET("/product/:productId", ProductController.GetProductById)
 
 	server.Run(":8080")
 }
