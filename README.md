@@ -16,6 +16,11 @@ This file contains the implementation of the product repository. It includes met
 - `NewProductRepository(db *sql.DB) ProductRepository`: Creates a new instance of the product repository.
 - `GetProduct() ([]model.Product, error)`: Retrieves all products from the database.
 
+### New Features
+
+- **Build for Multiple OS**: The Makefile now includes commands to build the application for Windows, Linux, and macOS.
+- **.gitignore**: Added a .gitignore file to exclude unnecessary files from the repository.
+
 ### Usage Example
 
 ```go
@@ -81,3 +86,20 @@ Run the command below to start the application:
 ```sh
 go run main.go
 ```
+
+## Building the Application
+
+Run the command below to build the application for your OS:
+
+- For Windows:
+  ```sh
+  make build-windows
+  ```
+- For Linux:
+  ```sh
+  make build-linux
+  ```
+- For macOS:
+  ```sh
+  make build-macos
+  ```
