@@ -16,3 +16,8 @@ clean:
 	@echo "Cleaning up..."
 	go clean
 	rm .\go-api.exe
+
+.PHONY: docker-build
+docker-build:
+	@echo "Building the Docker image..."
+	docker compose up -d

@@ -20,49 +20,13 @@ This file contains the implementation of the product repository. It includes met
 
 - **Build for Multiple OS**: The Makefile now includes commands to build the application for Windows, Linux, and macOS.
 - **.gitignore**: Added a .gitignore file to exclude unnecessary files from the repository.
-
-### Usage Example
-
-```go
-package main
-
-import (
-	"database/sql"
-	"fmt"
-	"go-api/repository"
-	_ "github.com/go-sql-driver/mysql"
-)
-
-func main() {
-	// Connect to the database
-	db, err := sql.Open("mysql", "user:password@tcp(127.0.0.1:3306)/dbname")
-	if err != nil {
-		fmt.Println(err)
-		return
-	}
-	defer db.Close()
-
-	// Create product repository
-	productRepo := repository.NewProductRepository(db)
-
-	// Get products
-	products, err := productRepo.GetProduct()
-	if err != nil {
-		fmt.Println(err)
-		return
-	}
-
-	// Display products
-	for _, product := range products {
-		fmt.Printf("ID: %d, Name: %s, Price: %.2f\n", product.ID, product.Name, product.Price)
-	}
-}
-```
+- **Docker Support**: Added Docker support to build and run the application in a container.
 
 ## Requirements
 
 - Go 1.16+
 - MySQL
+- Docker
 
 ## Installation
 
@@ -103,3 +67,14 @@ Run the command below to build the application for your OS:
   ```sh
   make build-macos
   ```
+
+## Using Docker
+
+1. Build the Docker image:
+   ```sh
+   make docker-build
+   ```
+2. Run the Docker container:
+   ```sh
+   docker compose up -d
+   ```

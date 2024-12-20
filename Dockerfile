@@ -1,10 +1,8 @@
-FROM golang:1.18
+FROM golang:1.22.5
 
 WORKDIR /go/src/app
 
 COPY . .
-
-RUN go mod
 
 EXPOSE 8080
 
