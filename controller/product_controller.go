@@ -10,17 +10,17 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
-type productController struct {
+type ProductController struct {
 	productUseCase usecase.ProductUseCase
 }
 
-func NewProductController(usecase usecase.ProductUseCase) productController {
-	return productController{
+func NewProductController(usecase usecase.ProductUseCase) *ProductController {
+	return &ProductController{
 		productUseCase: usecase,
 	}
 }
 
-func (p productController) GetProducts(ctx *gin.Context) {
+func (p *ProductController) GetProducts(ctx *gin.Context) {
 	products, err := p.productUseCase.GetProducts()
 
 	if err != nil {
@@ -37,7 +37,7 @@ func (p productController) GetProducts(ctx *gin.Context) {
 	})
 }
 
-func (p *productController) CreateProduct(ctx *gin.Context) {
+func (p *ProductController) CreateProduct(ctx *gin.Context) {
 	var req requests.CreateProductRequest
 
 	err := ctx.ShouldBindJSON(&req)
@@ -70,7 +70,7 @@ func (p *productController) CreateProduct(ctx *gin.Context) {
 
 }
 
-func (p productController) GetProductById(ctx *gin.Context) {
+func (p *ProductController) GetProductById(ctx *gin.Context) {
 	id := ctx.Param("productId")
 
 	if id == "" {
@@ -112,7 +112,7 @@ func (p productController) GetProductById(ctx *gin.Context) {
 	})
 }
 
-func (p *productController) UpdateProduct(ctx *gin.Context) {
+func (p *ProductController) UpdateProduct(ctx *gin.Context) {
 	id := ctx.Param("productId")
 
 	if id == "" {
@@ -166,7 +166,7 @@ func (p *productController) UpdateProduct(ctx *gin.Context) {
 	})
 }
 
-func (p *productController) DeleteProductById(ctx *gin.Context) {
+func (p *ProductController) DeleteProductById(ctx *gin.Context) {
 	id := ctx.Param("productId")
 
 	if id == "" {
