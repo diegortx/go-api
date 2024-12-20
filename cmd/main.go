@@ -1,10 +1,8 @@
 package main
 
 import (
-	"go-api/controller"
 	"go-api/db"
-	"go-api/repository"
-	"go-api/usecase"
+	"go-api/routes"
 
 	"github.com/gin-gonic/gin"
 )
@@ -17,24 +15,7 @@ func main() {
 		panic(err)
 	}
 
-	//Camada Repository
-	ProductRepository := repository.NewProductRepository(dbConnection)
-
-	//Camada UseCase
-	ProductUseCase := usecase.NewProductUseCase(ProductRepository)
-
-	//Camada de Controllers
-	ProductController := controller.NewProductController(ProductUseCase)
-
-	server.GET("/ping", func(ctx *gin.Context) {
-		ctx.JSON(200, gin.H{
-			"message": "pong",
-		})
-	})
-
-	server.GET("/products", ProductController.GetProduct)
-	server.POST("/product", ProductController.CreateProduct)
-	server.GET("/product/:productId", ProductController.GetProductById)
+	routes.RegisterRoutes(server, dbConnection)
 
 	server.Run(":8080")
 }

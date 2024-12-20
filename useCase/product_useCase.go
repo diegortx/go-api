@@ -15,8 +15,8 @@ func NewProductUseCase(repo repository.ProductRepository) ProductUseCase {
 	}
 }
 
-func (pu *ProductUseCase) GetProduct() ([]model.Product, error) {
-	return pu.repository.GetProduct()
+func (pu *ProductUseCase) GetProducts() ([]model.Product, error) {
+	return pu.repository.GetProducts()
 }
 
 func (pu *ProductUseCase) CreateProduct(product model.Product) (model.Product, error) {
@@ -30,6 +30,23 @@ func (pu *ProductUseCase) CreateProduct(product model.Product) (model.Product, e
 
 func (pu *ProductUseCase) GetProductById(id_product int) (*model.Product, error) {
 	product, err := pu.repository.GetProductById(id_product)
+	if err != nil {
+		return nil, err
+	}
+	return product, nil
+}
+
+func (pu *ProductUseCase) UpdateProduct(id_product int, product model.Product) (*model.Product, error) {
+	productUpdated, err := pu.repository.UpdateProduct(id_product, product)
+	if err != nil {
+		return nil, err
+	}
+	return productUpdated, nil
+}
+
+func (pu *ProductUseCase) DeleteProductById(id_product int) (*model.Product, error) {
+	product, err := pu.repository.DeleteProductById(id_product)
+
 	if err != nil {
 		return nil, err
 	}
