@@ -3,7 +3,7 @@ package controller
 import (
 	"go-api/model"
 	"go-api/requests"
-	"go-api/usecase"
+	"go-api/useCase"
 	"net/http"
 	"strconv"
 
@@ -11,10 +11,10 @@ import (
 )
 
 type ProductController struct {
-	productUseCase usecase.ProductUseCase
+	productUseCase useCase.ProductUseCase
 }
 
-func NewProductController(usecase usecase.ProductUseCase) *ProductController {
+func NewProductController(usecase useCase.ProductUseCase) *ProductController {
 	return &ProductController{
 		productUseCase: usecase,
 	}

@@ -1,4 +1,4 @@
-package usecase
+package useCase
 
 import (
 	"go-api/model"

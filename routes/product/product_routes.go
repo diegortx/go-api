@@ -4,7 +4,7 @@ import (
 	"database/sql"
 	"go-api/controller"
 	"go-api/repository"
-	"go-api/usecase"
+	"go-api/useCase"
 
 	"github.com/gin-gonic/gin"
 )
@@ -25,7 +25,7 @@ func initializeProductController(dbConnection *sql.DB) *controller.ProductContro
 	productRepository := repository.NewProductRepository(dbConnection)
 
 	// Camada UseCase
-	productUseCase := usecase.NewProductUseCase(productRepository)
+	productUseCase := useCase.NewProductUseCase(productRepository)
 
 	// Camada de Controllers
 	productController := controller.NewProductController(productUseCase)
