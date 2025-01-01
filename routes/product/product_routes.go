@@ -3,6 +3,7 @@ package product
 import (
 	"database/sql"
 	"go-api/controller"
+	"go-api/middleware"
 	"go-api/repository"
 	"go-api/useCase"
 
@@ -13,11 +14,14 @@ import (
 func RegisterProductRoutes(server *gin.Engine, dbConnection *sql.DB) {
 	productController := initializeProductController(dbConnection)
 
-	server.GET("/products", productController.GetProducts)
-	server.POST("/product", productController.CreateProduct)
-	server.GET("/product/:productId", productController.GetProductById)
-	server.PUT("/product/:productId", productController.UpdateProduct)
-	server.DELETE("/product/:productId", productController.DeleteProductById)
+	prefix := server.Group("/api/v1/product")
+	prefix.Use(middleware.RequireAuth(dbConnection))
+
+	prefix.GET("/", productController.GetProducts)
+	prefix.POST("/", productController.CreateProduct)
+	prefix.GET("/:productId", productController.GetProductById)
+	prefix.PUT("/:productId", productController.UpdateProduct)
+	prefix.DELETE("/:productId", productController.DeleteProductById)
 }
 
 func initializeProductController(dbConnection *sql.DB) *controller.ProductController {

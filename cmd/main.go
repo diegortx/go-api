@@ -1,21 +1,12 @@
 package main
 
 import (
-	"go-api/db"
-	"go-api/routes"
-
-	"github.com/gin-gonic/gin"
+	"go-api/initializers"
 )
 
-func main() {
-	server := gin.Default()
-
-	dbConnection, err := db.ConnectDB()
-	if err != nil {
-		panic(err)
-	}
-
-	routes.RegisterRoutes(server, dbConnection)
-
-	server.Run(":8080")
+func init() {
+	initializers.LoadEnvVariables()
+	initializers.LoadGinServer()
 }
+
+func main() {}

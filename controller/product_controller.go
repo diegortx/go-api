@@ -2,7 +2,7 @@ package controller
 
 import (
 	"go-api/model"
-	"go-api/requests"
+	requests "go-api/requests/product"
 	"go-api/useCase"
 	"net/http"
 	"strconv"
@@ -58,13 +58,13 @@ func (p *ProductController) CreateProduct(ctx *gin.Context) {
 
 	if err != nil {
 		ctx.JSON(http.StatusBadRequest, model.Response{
-			Message: "Failed to insert product",
+			Message: "Failed to create product",
 			Data:    err.Error(),
 		})
 		return
 	}
 	ctx.JSON(http.StatusCreated, model.Response{
-		Message: "Product created successfully",
+		Message: "Success",
 		Data:    insertedProduct,
 	})
 
