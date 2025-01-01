@@ -24,12 +24,10 @@
         .welcome-container h1 {
             font-size: 4em;
             margin: 0;
-            animation: slideIn 1s ease-out, pulse 2s infinite;
         }
         .welcome-container p {
             font-size: 1.5em;
             margin: 10px 0 0;
-            animation: slideIn 1.5s ease-out, pulse 2s infinite;
         }
         @keyframes fadeIn {
             from { opacity: 0; }
@@ -48,8 +46,31 @@
 </head>
 <body>
     <div class="welcome-container">
-        <h1>Welcome</h1>
+        <h1 id="welcome-message"></h1>
         <p>Go API!</p>
     </div>
+    <script>
+        const messages = ["Welcome", "Bem Vindo","Bienvenido", "Bienvenue", "Willkommen", "Benvenuto", "欢迎", "ようこそ", "환영합니다"];
+        let messageIndex = 0;
+        let charIndex = 0;
+        const welcomeMessageElement = document.getElementById('welcome-message');
+
+        function typeWriter() {
+            if (charIndex < messages[messageIndex].length) {
+                welcomeMessageElement.innerHTML += messages[messageIndex].charAt(charIndex);
+                charIndex++;
+                setTimeout(typeWriter, 100);
+            } else {
+                setTimeout(() => {
+                    welcomeMessageElement.innerHTML = '';
+                    charIndex = 0;
+                    messageIndex = (messageIndex + 1) % messages.length;
+                    typeWriter();
+                }, 2000);
+            }
+        }
+
+        typeWriter();
+    </script>
 </body>
 </html>
