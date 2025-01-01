@@ -14,9 +14,7 @@ func RegisterRoutes(server *gin.Engine, dbConnection *sql.DB) {
 	product.RegisterProductRoutes(server, dbConnection)
 	user.RegisterUserRoutes(server, dbConnection)
 
-	server.GET("/ping", func(ctx *gin.Context) {
-		ctx.JSON(200, gin.H{
-			"message": "pong",
-		})
+	server.GET("/", func(ctx *gin.Context) {
+		ctx.File("./views/home.html")
 	})
 }
